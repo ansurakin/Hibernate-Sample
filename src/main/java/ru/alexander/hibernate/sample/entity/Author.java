@@ -17,6 +17,8 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.NonNull;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -28,6 +30,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @RequiredArgsConstructor
 @DynamicUpdate
 @DynamicInsert
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "ru.alexander.hibernate.sample.entity.Author")
 public class Author implements Serializable {
 
     @Id
