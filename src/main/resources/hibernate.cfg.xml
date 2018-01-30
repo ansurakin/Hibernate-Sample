@@ -13,7 +13,7 @@
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.default_schema">public</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <property name="generate_statistics">true</property>
+    <!--<property name="generate_statistics">true</property>-->
     
     <mapping class="ru.alexander.hibernate.sample.entity.Author" />
     <mapping class="ru.alexander.hibernate.sample.entity.Book" />

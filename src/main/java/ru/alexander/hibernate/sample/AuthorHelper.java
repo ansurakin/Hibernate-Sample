@@ -10,14 +10,20 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.ParameterExpression;
+import org.hibernate.stat.Statistics;
 import ru.alexander.hibernate.sample.entity.Author;
 
 public class AuthorHelper {
+
+    private static Statistics stat;
 
     private SessionFactory sessionFactory;
 
     public AuthorHelper() {
         sessionFactory = HibernateUtil.getSessionFactory();
+        stat = sessionFactory.getStatistics();
+        stat.clear();
+        stat.setStatisticsEnabled(true);
     }
 
     public List<Author> getAuthorList() {
@@ -45,6 +51,8 @@ public class AuthorHelper {
         List<Author> authorList = query.getResultList();
 
         session.close();
+        
+        printStat();
 
         return authorList;
 
@@ -99,6 +107,13 @@ public class AuthorHelper {
         author.getBooks().get(0).getName();
 
         return author;
+    }
+    
+    private static void printStat() {
+        System.out.println("Выполнено запросов в БД: "+stat.getQueryExecutionCount());
+        System.out.println("Найдено в кэше: "+stat.getSecondLevelCacheHitCount());
+        System.out.println("Добавлено в кэш: "+stat.getSecondLevelCachePutCount());
+        stat.clear();
     }
 
 }
