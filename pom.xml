@@ -10,9 +10,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <version.hibernate>5.1.0.Final</version.hibernate>
+        <mainClass>ru.alexander.hibernate.sample.Start</mainClass>
+        <version.hibernate>5.2.2.Final</version.hibernate>
         <version.postgresql>42.2.1</version.postgresql>
         <version.lombok>1.16.20</version.lombok>
+        <version.maven-jar-plugin>3.0.2</version.maven-jar-plugin>
     </properties>
     
     
@@ -36,5 +38,23 @@
         </dependency>
         
     </dependencies>
+    
+    <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${version.maven-jar-plugin}</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>${mainClass}</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
     
 </project>
