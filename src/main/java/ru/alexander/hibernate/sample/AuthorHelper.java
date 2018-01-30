@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ParameterExpression;
 import org.hibernate.stat.Statistics;
 import ru.alexander.hibernate.sample.entity.Author;
@@ -43,6 +44,8 @@ public class AuthorHelper {
 
         Root<Author> root = cq.from(Author.class);// первостепенный, корневой entity (в sql запросе - from)
 
+        root.fetch("books", JoinType.INNER);
+        
         cq.select(root);// необязательный оператор, если просто нужно получить все значения
 
         // этап выполнения запроса
