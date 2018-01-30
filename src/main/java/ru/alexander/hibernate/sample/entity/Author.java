@@ -3,7 +3,6 @@ package ru.alexander.hibernate.sample.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,8 +43,6 @@ public class Author implements Serializable {
     private String secondName;
 
     @OneToMany(fetch = FetchType.EAGER, targetEntity = Book.class, mappedBy="author")// может быть автором нескольких книг (Book)
-   
-    @Basic(fetch = FetchType.LAZY)
     public List<Book> books = new ArrayList<>();
 
 }

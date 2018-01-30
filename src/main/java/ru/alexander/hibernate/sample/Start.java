@@ -15,12 +15,12 @@ public class Start {
 //            LOG.debug(item.getName());
 //        }
         
-        Author author = new Author("тест3");
-        new AuthorHelper().addAuthor(author);
-
-        new AuthorHelper().delete();
-
-        new BookHelper().getBookList();
+//        Author author = new Author("тест3");
+//        new AuthorHelper().addAuthor(author);
+//
+//        new AuthorHelper().delete();
+//
+//        new BookHelper().getBookList();
         
         new AuthorHelper().getAuthorList();
 

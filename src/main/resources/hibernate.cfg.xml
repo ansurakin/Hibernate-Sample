@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
@@ -14,8 +13,9 @@
     <property name="hibernate.default_schema">public</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <!--<property name="generate_statistics">true</property>-->
+    <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+    <mapping class="ru.alexander.hibernate.sample.entity.Author"/>
+    <mapping class="ru.alexander.hibernate.sample.entity.Book"/>
     
-    <mapping class="ru.alexander.hibernate.sample.entity.Author" />
-    <mapping class="ru.alexander.hibernate.sample.entity.Book" />
   </session-factory>
 </hibernate-configuration>

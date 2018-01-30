@@ -16,6 +16,7 @@
         <version.lombok>1.16.20</version.lombok>
         <version.slf4j-log4j12>1.7.25</version.slf4j-log4j12>
         <version.maven-jar-plugin>3.0.2</version.maven-jar-plugin>
+        <version.hibernate-ehcache>5.2.2.Final</version.hibernate-ehcache>
     </properties>
     
     
@@ -46,6 +47,11 @@
             <groupId>com.jcabi</groupId>
             <artifactId>jcabi-log</artifactId>
             <version>0.18</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>${version.hibernate-ehcache}</version>
         </dependency>
     </dependencies>
     
