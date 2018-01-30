@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
@@ -20,6 +22,8 @@ public class Book implements Serializable {
 
     private String name;
 
-    private long author_id;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
 
 }

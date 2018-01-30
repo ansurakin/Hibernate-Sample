@@ -91,8 +91,14 @@ public class AuthorHelper {
         session.close();
     }
 
-    public Author getAuthor(String name) {
-        return null;
+    public Author getAuthor(long id){
+        Session session = sessionFactory.openSession();
+
+        Author author = session.get(Author.class, id);
+
+        author.getBooks().get(0).getName();
+
+        return author;
     }
 
 }

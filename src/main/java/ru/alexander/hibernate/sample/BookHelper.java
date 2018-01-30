@@ -46,10 +46,6 @@ public class BookHelper {
         session.close();
 
         return bookList;
-
     }
-
-
-
 
 }

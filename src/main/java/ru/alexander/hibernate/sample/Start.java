@@ -19,6 +19,8 @@ public class Start {
         new AuthorHelper().addAuthor(author);
         
         new AuthorHelper().delete();
+        
+        new BookHelper().getBookList();
 
     }
 }
