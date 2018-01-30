@@ -1,6 +1,5 @@
 package ru.alexander.hibernate.sample;
 
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -9,8 +8,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.ParameterExpression;
 import ru.alexander.hibernate.sample.entity.Author;
-
 
 public class AuthorHelper {
 
@@ -20,19 +20,16 @@ public class AuthorHelper {
         sessionFactory = HibernateUtil.getSessionFactory();
     }
 
-    public List<Author> getAuthorList(){
+    public List<Author> getAuthorList() {
 
         // открыть сессию - для манипуляции с персист. объектами
         Session session = sessionFactory.openSession();
 
         Author author = session.get(Author.class, 1L); // получение объекта по id
 
-
         System.out.println(author.getName());
 
-
         // этап подготовки запроса
-
         // объект-конструктор запросов для Criteria API
         CriteriaBuilder cb = session.getCriteriaBuilder();// не использовать session.createCriteria, т.к. deprecated
 
@@ -41,8 +38,6 @@ public class AuthorHelper {
         Root<Author> root = cq.from(Author.class);// первостепенный, корневой entity (в sql запросе - from)
 
         cq.select(root);// необязательный оператор, если просто нужно получить все значения
-
-
 
         // этап выполнения запроса
         Query query = session.createQuery(cq);
@@ -56,7 +51,7 @@ public class AuthorHelper {
     }
 
     // добавляют нового автора в таблица Author
-    public Author addAuthor(Author author){
+    public Author addAuthor(Author author) {
 
         Session session = sessionFactory.openSession();
 
@@ -76,10 +71,28 @@ public class AuthorHelper {
 
     }
 
-    public Author getAuthor(String name){
-        return null;
+    public void delete() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        
+        CriteriaDelete<Author> criteriaDelete = cb.createCriteriaDelete(Author.class);
+        Root<Author> root = criteriaDelete.from(Author.class);
+        ParameterExpression<String> nameParam = cb.parameter(String.class, "name");
+        criteriaDelete.where(cb.like(root.get("name"), nameParam));
+        
+//        Author author = session.get(Author.class, 1L);
+        
+        Query query = session.createQuery(criteriaDelete);
+        query.setParameter("name", "%111%");
+        query.executeUpdate();
+        
+        session.getTransaction().commit();
+        session.close();
     }
 
-
+    public Author getAuthor(String name) {
+        return null;
+    }
 
 }

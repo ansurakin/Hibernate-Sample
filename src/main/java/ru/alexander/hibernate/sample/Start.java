@@ -17,6 +17,8 @@ public class Start {
 
         Author author = new Author("тест3");
         new AuthorHelper().addAuthor(author);
+        
+        new AuthorHelper().delete();
 
     }
 }
